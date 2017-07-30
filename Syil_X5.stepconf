@@ -33,7 +33,7 @@
   <property name="ladderconnect" type="bool" value="True"/>
   <property name="ladderhaltype" type="int" value="0"/>
   <property name="laddername" type="string" value="custom.clp"/>
-  <property name="latency" type="float" value="20000.0"/>
+  <property name="latency" type="float" value="5000.0"/>
   <property name="machinename" type="string" value="Syil_X5"/>
   <property name="manualtoolchange" type="bool" value="True"/>
   <property name="md5sums" type="eval" value="[]"/>
@@ -140,7 +140,7 @@
   <property name="spindlepwm1" type="float" value="0.2"/>
   <property name="spindlepwm2" type="float" value="0.8"/>
   <property name="spindlespeed1" type="float" value="100.0"/>
-  <property name="spindlespeed2" type="float" value="800.0"/>
+  <property name="spindlespeed2" type="float" value="4000.0"/>
   <property name="stepspace" type="float" value="5000.0"/>
   <property name="steptime" type="float" value="5000.0"/>
   <property name="tempexists" type="int" value="0"/>
