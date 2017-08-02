@@ -1,8 +1,8 @@
-#INCLUDE mm_base.inc
-#INCLUDE layout2.inc
-
-[EMC]
-MACHINE =  xhc-hb04 layout2 mm demo
+# #INCLUDE mm_base.inc
+# #INCLUDE layout2.inc
+# 
+# [EMC]
+# MACHINE =  xhc-hb04 layout2 mm demo
 
 [HAL]
 HALFILE = core_sim9.hal
