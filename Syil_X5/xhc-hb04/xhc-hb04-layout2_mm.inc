@@ -4,13 +4,11 @@
 # [EMC]
 # MACHINE =  xhc-hb04 layout2 mm demo
 
-[HAL]
-HALFILE = core_sim9.hal
-HALFILE = sim_spindle_encoder.hal
-HALFILE = axis_manualtoolchange.hal
-HALFILE = simulated_home.hal
-HALFILE = LIB:xhc-hb04.tcl
-HALUI   = halui
+# [HAL]
+# HALFILE = core_sim9.hal
+# HALFILE = sim_spindle_encoder.hal
+# HALFILE = axis_manualtoolchange.hal
+# HALFILE = simulated_home.hal
 
 [XHC_HB04_CONFIG]
 # specify layout = n for LIB:xhc-hb04-layout{n}.cfg files
@@ -18,12 +16,12 @@ layout = 2
 # coords: specify upto 4 letters from set {x y z a b c u v w}
 # coords: switch labels are xyza but any unique 4 letters
 #         from the set {xyxabcuvw) can be used (if the coord exists)
-coords = x y z c
+coords = x y z a
 # lowpass settings:
 # coef: slows rate of change of output,  range: 0 < coef < 1
 coefs = 1 1 1 1
 # scale plus or minus, rotaries may require larger scale factor:
-scales = 1 -1 1 1
+scales = 1 1 1 1
 # jogmode normal(default) or vnormal or plus-minus
 jogmode = normal
 # sequence 1: 0.001,0.010,0.100,1.000 (mm-based machine)
