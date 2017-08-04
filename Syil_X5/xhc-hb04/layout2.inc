@@ -14,7 +14,8 @@ goto-zero-a = ""
 start-pause = std_start_pause
 rewind      = halui.program.step
 # probe-input for simulating a probe:
-probe-z     = motion.probe-input
+# probe-z     = motion.probe-input
+probe-z     = ""
 macro-3     = halui.mdi-command-03
 
 half        = halui.spindle.stop
