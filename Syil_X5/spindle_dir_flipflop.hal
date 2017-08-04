@@ -1,0 +1,5 @@
+loadrt flipflop
+addf flipflop.0 servo-thread
+net spindle-cw-true motion.spindle-forward => flipflop.0.reset
+net spindle-ccw-true motion.spindle-reverse => flipflop.0.set
+net spindlw-ccw parport.0.pin-01-out <= flipflop.0.out
