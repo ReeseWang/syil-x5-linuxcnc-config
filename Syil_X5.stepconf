@@ -43,15 +43,15 @@
   <property name="pin1" type="string" value="spindle-cw"/>
   <property name="pin10" type="string" value="all-limit-home"/>
   <property name="pin10inv" type="bool" value="True"/>
-  <property name="pin11" type="string" value="unused-input"/>
-  <property name="pin11inv" type="bool" value="True"/>
+  <property name="pin11" type="string" value="estop-ext"/>
+  <property name="pin11inv" type="bool" value="False"/>
   <property name="pin12" type="string" value="unused-input"/>
   <property name="pin12inv" type="bool" value="True"/>
   <property name="pin13" type="string" value="unused-input"/>
   <property name="pin13inv" type="bool" value="True"/>
   <property name="pin14" type="string" value="adir"/>
   <property name="pin14inv" type="bool" value="True"/>
-  <property name="pin15" type="string" value="unused-input"/>
+  <property name="pin15" type="string" value="probe-in"/>
   <property name="pin15inv" type="bool" value="True"/>
   <property name="pin16" type="string" value="zdir"/>
   <property name="pin16inv" type="bool" value="True"/>
