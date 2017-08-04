@@ -30,8 +30,8 @@ net spindle-cmd-rpm => pwmgen.0.value
 net spindle-on <= motion.spindle-on => pwmgen.0.enable
 net spindle-pwm <= pwmgen.0.pwm
 setp pwmgen.0.pwm-freq 100.0
-setp pwmgen.0.scale 6500.0
-setp pwmgen.0.offset 0.184615384615
+setp pwmgen.0.scale 5399.3385241188
+setp pwmgen.0.offset -0.0033914595
 setp pwmgen.0.dither-pwm true
 net spindle-cmd-rpm     <= motion.spindle-speed-out
 net spindle-cmd-rpm-abs <= motion.spindle-speed-out-abs
