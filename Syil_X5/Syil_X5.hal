@@ -7,7 +7,7 @@ loadrt hal_parport cfg="0x378 out"
 setp parport.0.reset-time 5000
 loadrt stepgen step_type=0,0,0,0
 loadrt charge_pump
-net estop-out charge-pump.enable iocontrol.0.user-enable-out
+net estop-ext => charge-pump.enable
 net charge-pump <= charge-pump.out
 loadrt lut5
 loadrt pwmgen output_type=1
@@ -141,7 +141,7 @@ net all-limit-home => axis.3.home-sw-in
 net all-limit => axis.3.neg-lim-sw-in
 net all-limit => axis.3.pos-lim-sw-in
 
-net estop-out <= iocontrol.0.user-enable-out
+# net estop-out <= iocontrol.0.user-enable-out
 net estop-ext => iocontrol.0.emc-enable-in
 
 loadusr -W hal_manualtoolchange
