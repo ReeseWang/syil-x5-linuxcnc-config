@@ -1,0 +1,28 @@
+G17 G21 G40 G49 G64 P0.001 G80 G91 G94 G97 G98
+#<sample_size> = 10
+#<leave_height> = 10
+#<ref_tool_length> = 95.304584
+G38.2 Z-20 F200
+G1 Z0.5 F200
+#<counter> = 0
+#<average> = 0
+#<stderr> = 0
+o100 while [#<counter> LT #<sample_size>]
+  G38.2 Z-1 F50
+  G1 Z0.5 F200
+  ;#[31 + #<counter>] = #5063
+  #<average> = [#<average> + #5063 / #<sample_size>]
+  #<stderr> = [#<stderr> + [#5063 ** 2] / #<sample_size>]
+  ;(DEBUG, #5063)
+  #<counter> = [#<counter> + 1]
+o100 endwhile
+#<stderr> = [SQRT[#<stderr> - #<average> ** 2] * 1000]
+#<tool_length> = [#<average> + #<ref_tool_length>]
+(DEBUG, Length offset from the reference tool is #<average>mm, if the length of reference tool is #<ref_tool_length>, then the length of this tool would be #<tool_length>mm.)
+(DEBUG, Standard deviation is #<stderr>um)
+(MSG, Please run "G10 L1 Pn Z#<tool_length>" to save to tool table)
+G90
+G0 Z[#<average> + #<leave_height>]
+;G10 L20 P0 Z#<leave_height>
+M2
+
