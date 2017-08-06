@@ -1,5 +1,6 @@
-T1 P1 Z95.3046 D8 ;4F-8D-20C-60L-8SD 35deg carbide TiAlN coating end mill 
-T2 P2 Z130.008 D10 ;3F-10D-50C-100L-10SD carbide end mill
-T3 P3 Z91.118 D6 ;0.4D-45deg-6SD carbide round engraving tool
+T1 P1 Z95.3046 D8 ;4f-8d-20c-60l-8sd 35deg carbide tialn coating end mill 
+T2 P2 Z130.008 D10 ;3f-10d-50c-100l-10sd carbide end mill 
+T3 P3 Z91.118 D6 ;0.4d-45deg-6sd carbide round engraving tool 
 T99999 P99999 Z0.1 ;big tool number 
-T4 P4 Z85.6878 D4 ;4F-4D-15C-50L-4SD 35deg carbide TiAlN coating end mill
+T4 P4 Z85.6878 D4 ;4f-4d-15c-50l-4sd 35deg carbide tialn coating end mill 
+T5 P5 Z171.239 D4 ;haimer 3d taster in er32 holder 
