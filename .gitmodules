@@ -1,0 +1,3 @@
+[submodule "probe_screen"]
+	path = probe_screen
+	url = git@github.com:verser-git/probe_screen.git
