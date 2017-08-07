@@ -36,7 +36,7 @@ require_pendant = yes
 # inch_or_mm = in | mm
 inch_or_mm = mm
 # mpg_accels: provision for reduced acceleration for manual mode jogging
-mpg_accels = 750 750 750 1200
+mpg_accels = 250 250 250 600
 
 [APPLICATIONS]
 APP = xhc-hb04-accels
