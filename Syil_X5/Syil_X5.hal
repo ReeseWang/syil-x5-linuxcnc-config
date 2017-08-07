@@ -41,8 +41,6 @@ net spindle-at-speed    => motion.spindle-at-speed
 # net spindle-cw <= motion.spindle-forward
 net coolant-flood <= iocontrol.0.coolant-flood
 
-net probe-in => motion.probe-input
-
 setp parport.0.pin-01-out-invert 1
 # net spindle-ccw      => parport.0.pin-01-out
 setp parport.0.pin-02-out-invert 1
@@ -72,7 +70,6 @@ setp parport.0.pin-17-out-invert 1
 net xdir            => parport.0.pin-17-out
 net all-limit-home  <= parport.0.pin-10-in-not
 net estop-ext       <= parport.0.pin-11-in
-net probe-in        <= parport.0.pin-15-in-not
 net zneg-limit	    <= parport.0.pin-13-in
 setp lut5.0.function 0x10000
 net all-limit-home => lut5.0.in-4

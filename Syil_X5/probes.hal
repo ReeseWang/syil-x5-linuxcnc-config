@@ -1,0 +1,5 @@
+loadrt or2
+addf or2.0 base-thread
+net height-probe-in or2.0.in0 <= parport.0.pin-15-in-not
+net touch-probe-in or2.0.in1 <= parport.0.pin-12-in
+net probe-in or2.0.out => motion.probe-input
