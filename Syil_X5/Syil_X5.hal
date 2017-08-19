@@ -10,12 +10,12 @@ loadrt charge_pump
 net estop-ext => charge-pump.enable
 net charge-pump <= charge-pump.out
 loadrt lut5
-loadrt pwmgen output_type=1
+# loadrt pwmgen output_type=1
 
 addf parport.0.read base-thread
 addf stepgen.make-pulses base-thread
 addf charge-pump base-thread
-addf pwmgen.make-pulses base-thread
+# addf pwmgen.make-pulses base-thread
 addf parport.0.write base-thread
 addf parport.0.reset base-thread
 
@@ -24,15 +24,15 @@ addf motion-command-handler servo-thread
 addf motion-controller servo-thread
 addf stepgen.update-freq servo-thread
 addf lut5.0 servo-thread
-addf pwmgen.update servo-thread
+# addf pwmgen.update servo-thread
 
-net spindle-cmd-rpm => pwmgen.0.value
-net spindle-on <= motion.spindle-on => pwmgen.0.enable
-net spindle-pwm <= pwmgen.0.pwm
-setp pwmgen.0.pwm-freq 100.0
-setp pwmgen.0.scale 5399.3385241188
-setp pwmgen.0.offset -0.0033914595
-setp pwmgen.0.dither-pwm true
+# net spindle-cmd-rpm => pwmgen.0.value
+net spindle-on <= motion.spindle-on
+# net spindle-pwm <= pwmgen.0.pwm
+# setp pwmgen.0.pwm-freq 100.0
+# setp pwmgen.0.scale 5399.3385241188
+# setp pwmgen.0.offset -0.0033914595
+# setp pwmgen.0.dither-pwm true
 net spindle-cmd-rpm     <= motion.spindle-speed-out
 net spindle-cmd-rpm-abs <= motion.spindle-speed-out-abs
 net spindle-cmd-rps     <= motion.spindle-speed-out-rps
@@ -44,7 +44,7 @@ net coolant-flood <= iocontrol.0.coolant-flood
 setp parport.0.pin-01-out-invert 1
 # net spindle-ccw      => parport.0.pin-01-out
 setp parport.0.pin-02-out-invert 1
-net spindle-pwm     => parport.0.pin-02-out
+# net spindle-pwm     => parport.0.pin-02-out
 setp parport.0.pin-03-out-invert 1
 net coolant-flood   => parport.0.pin-03-out
 setp parport.0.pin-04-out-invert 1
