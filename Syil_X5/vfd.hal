@@ -1,8 +1,6 @@
 loadusr -W vfdm_vfd --ini Syil_X5.ini
-setp vfdm_vfd.loop-time 1
-setp vfdm_vfd.nameplate-HZ 50
-setp vfdm_vfd.nameplate-RPM 1420
 setp vfdm_vfd.rpm-limit 5000
 net spindle-cmd-rpm => vfdm_vfd.speed-command
 net spindle-on => vfdm_vfd.spindle-on
 net estop-ext => vfdm_vfd.enable
+net spindle-at-speed <= vfdm_vfd.at-speed
