@@ -1,0 +1,87 @@
+#<sample_size> = 10
+#<safe_dist_mm> = 2
+#<accel> = 250
+#<_safe_feed> = [SQRT[2 * #<accel> * #<safe_dist_mm>] * 60]; Safe feed, ensuring stopping within the safe distance
+#<probe_feed> = 50
+#<latch_dist_mm> = 0.5
+#<xhome> = #<_ini[AXIS_0]HOME>
+#<xmax> = #<_ini[AXIS_0]MAX_LIMIT>
+#<yhome> = #<_ini[AXIS_1]HOME>
+#<ymax> = #<_ini[AXIS_1]MAX_LIMIT>
+#<zmax> = #<_ini[AXIS_2]MAX_LIMIT>
+
+o100 sub
+(Safe move X)
+	G38.3 X#1 F#<_safe_feed>
+	o101 if [#<_x> NE #1]
+		(MSG, Probe triggered during positioning move.)
+		M2
+	o101 endif
+o100 endsub
+
+o200 sub
+(Safe move Y)
+	G38.3 Y#1 F#<_safe_feed>
+	o201 if [#<_y> NE #1]
+		(MSG, Probe triggered during positioning move.)
+		(DEBUG, #<_y> NE #1)
+		M2
+	o201 endif
+o200 endsub
+
+o300 sub
+(Safe move Z)
+	G38.3 Z#1 F#<_safe_feed>
+	o301 if [#<_z> NE #1]
+		(MSG, Probe triggered during positioning move.)
+		M2
+	o301 endif
+o300 endsub
+
+G17 G21 G40 G49 G64 P0.001 G80 G90 G94 G97 G98
+G92.2; Cancel G92 offset, IMPORTANT
+G10 L2 P0 X0 Y0 Z0; Make current CS (P0) coincident to G53 CS
+T6 M6; The probe is tool No. 6
+G0 G53 Z#<zmax>
+o100 call [#<xmax>]
+o200 call [#<ymax>]
+o300 call [#<zmax> - 45]
+G91; Relative
+G38.2 Y-10 F#<probe_feed>
+#<average> = 0
+#<stderr> = 0; micrometer
+o10 repeat [#<sample_size>]
+	G0 Y#<latch_dist_mm>
+	G38.2 Y-[2*#<latch_dist_mm>] F#<probe_feed>
+	#<average> = [#<average> + #5062 / #<sample_size>]
+	#<stderr> = [#<stderr> + [#5062 ** 2] / #<sample_size>]
+o10 endrepeat
+#<stderr> = [SQRT[#<stderr> - #<average> ** 2] * 1000]
+(DEBUG, STDERR = #<stderr>)
+(DEBUG, AVERAGE = #<average>)
+G10 L2 P0 Y[#<average> - 63.5086 - 1]; Set Y offset, Y not coincident anymore
+G90; Absolute
+G0 G53 Y#<ymax>
+o300 call [#<zmax>]
+o200 call [0]
+o300 call [#<zmax> - 20]
+G43; Apply length offset. Reference point should be the center of the sphere.
+G91; Relative
+G38.2 Z-10 F#<probe_feed>
+#<average> = 0
+#<stderr> = 0; micrometer
+o20 repeat [#<sample_size>]
+	G0 Z#<latch_dist_mm>
+	G38.2 Z-[2*#<latch_dist_mm>] F#<probe_feed>
+	#<average> = [#<average> + #5063 / #<sample_size>]
+	#<stderr> = [#<stderr> + [#5063 ** 2] / #<sample_size>]
+o20 endrepeat
+#<stderr> = [SQRT[#<stderr> - #<average> ** 2] * 1000]
+(DEBUG, STDERR = #<stderr>)
+(DEBUG, AVERAGE = #<average>)
+G10 L2 P0 Z[#<average> - 72.5059 - 1]
+G90; Absolute
+G0 G53 Z#<zmax>
+M2
+
+
