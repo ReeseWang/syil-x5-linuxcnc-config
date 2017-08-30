@@ -14,7 +14,7 @@ o100 sub
 (Safe move X)
 	G38.3 X#1 F#<_safe_feed>
 	o101 if [#<_x> NE #1]
-		(MSG, Probe triggered during positioning move.)
+		(DEBUG, Probe triggered during positioning move. Commanded X#1, stopped at X#<_x>)
 		M2
 	o101 endif
 o100 endsub
@@ -23,8 +23,7 @@ o200 sub
 (Safe move Y)
 	G38.3 Y#1 F#<_safe_feed>
 	o201 if [#<_y> NE #1]
-		(MSG, Probe triggered during positioning move.)
-		(DEBUG, #<_y> NE #1)
+		(DEBUG, Probe triggered during positioning move. Commanded Y#1, stopped at Y#<_y>)
 		M2
 	o201 endif
 o200 endsub
@@ -33,8 +32,7 @@ o300 sub
 (Safe move Z)
 	G38.3 Z#1 F#<_safe_feed>
 	o301 if [#<_z> NE #1]
-		(MSG, Probe triggered during positioning move.)
-		M2
+		(DEBUG, Probe triggered during positioning move. Commanded Z#1, stopped at Z#<_z>)
 	o301 endif
 o300 endsub
 
@@ -42,10 +40,14 @@ G17 G21 G40 G49 G64 P0.001 G80 G90 G94 G97 G98
 G92.2; Cancel G92 offset, IMPORTANT
 G10 L2 P0 X0 Y0 Z0; Make current CS (P0) coincident to G53 CS
 T6 M6; The probe is tool No. 6
+
+; Moving to Y measurement position
 G0 G53 Z#<zmax>
 o100 call [#<xmax>]
-o200 call [#<ymax>]
+o200 call [#<ymax> - 1]
 o300 call [#<zmax> - 45]
+
+; Start probing
 G91; Relative
 G38.2 Y-10 F#<probe_feed>
 #<average> = 0
@@ -57,14 +59,18 @@ o10 repeat [#<sample_size>]
 	#<stderr> = [#<stderr> + [#5062 ** 2] / #<sample_size>]
 o10 endrepeat
 #<stderr> = [SQRT[#<stderr> - #<average> ** 2] * 1000]
-(DEBUG, STDERR = #<stderr>)
-(DEBUG, AVERAGE = #<average>)
+(DEBUG, Y STDERR = #<stderr>um)
+;(DEBUG, AVERAGE = #<average>)
 G10 L2 P0 Y[#<average> - 63.5086 - 1]; Set Y offset, Y not coincident anymore
+G0 Y1; Move away
+
+; Moving to Z measurement position
 G90; Absolute
-G0 G53 Y#<ymax>
 o300 call [#<zmax>]
 o200 call [0]
 o300 call [#<zmax> - 20]
+
+; Start probing
 G43; Apply length offset. Reference point should be the center of the sphere.
 G91; Relative
 G38.2 Z-10 F#<probe_feed>
@@ -77,11 +83,18 @@ o20 repeat [#<sample_size>]
 	#<stderr> = [#<stderr> + [#5063 ** 2] / #<sample_size>]
 o20 endrepeat
 #<stderr> = [SQRT[#<stderr> - #<average> ** 2] * 1000]
-(DEBUG, STDERR = #<stderr>)
-(DEBUG, AVERAGE = #<average>)
-G10 L2 P0 Z[#<average> - 72.5059 - 1]
+(DEBUG, Z STDERR = #<stderr>um)
+;(DEBUG, AVERAGE = #<average>)
+G10 L2 P0 Z[#<average> - 72.5059 - 1]; Set Z offset.
+
+; Retract
 G90; Absolute
 G0 G53 Z#<zmax>
+
+#<yoff> = #[5202 + 20*#5220]
+#<zoff> = #[5203 + 20*#5220]
+
+(DEBUG, New offset from G53 is Y#<yoff>, Z#<zoff>)
 M2
 
 
