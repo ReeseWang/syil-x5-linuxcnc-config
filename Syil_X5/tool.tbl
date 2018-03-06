@@ -6,5 +6,5 @@ T4 P4 Z85.6878 D4 ;4f-4d-15c-50l-4sd 35deg carbide tialn coating end mill
 T5 P5 Z171.239 D4 ;haimer 3d taster in er32 holder 
 T6 P6 Z136.722884 D2 ;DIY touch probe bought from eBay USA
 T7 P7 Z0 D2 ;SGO S-550 2X8CX2TX4DX50L 1512
-T8 P8 Z114.706818D8 ;8X8 M2AL Roughing Tool
+T8 P8 Z114.706818 D8 ;8X8 M2AL Roughing Tool
 T9 P9 Z86.312747 D3 ;SGO S-5503X9CX3TX4DX50L 1603
