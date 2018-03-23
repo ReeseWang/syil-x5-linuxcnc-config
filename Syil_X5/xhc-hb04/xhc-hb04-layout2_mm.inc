@@ -23,7 +23,7 @@ coefs = 1 1 1 1
 # scale plus or minus, rotaries may require larger scale factor:
 scales = 1 1 1 1
 # jogmode normal(default) or vnormal or plus-minus
-jogmode = normal
+jogmode = vnormal
 # sequence 1: 0.001,0.010,0.100,1.000 (mm-based machine)
 # sequence 2: 0.001,0.005,0.010,0.020 (inch-based machine)
 # sequence 3: 0.001,0.010,0.100
@@ -36,7 +36,7 @@ require_pendant = yes
 # inch_or_mm = in | mm
 inch_or_mm = mm
 # mpg_accels: provision for reduced acceleration for manual mode jogging
-mpg_accels = 250 250 250 600
+mpg_accels = 300 300 300 300
 
 [APPLICATIONS]
 APP = xhc-hb04-accels
