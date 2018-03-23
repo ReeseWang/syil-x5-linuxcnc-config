@@ -41,3 +41,5 @@ mpg_accels = 300 300 300 300
 [APPLICATIONS]
 APP = xhc-hb04-accels
 APP = monitor-xhc-hb04
+
+# vim: ft=dosini
