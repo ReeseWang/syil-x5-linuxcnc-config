@@ -9,7 +9,7 @@ loadrt stepgen step_type=0,0,0,0
 loadrt charge_pump
 net estop-ext => charge-pump.enable
 net charge-pump <= charge-pump.out
-loadrt lut5
+loadrt lut5 names=limit-switches-lut
 # loadrt pwmgen output_type=1
 
 addf parport.0.read base-thread
@@ -23,7 +23,7 @@ addf stepgen.capture-position servo-thread
 addf motion-command-handler servo-thread
 addf motion-controller servo-thread
 addf stepgen.update-freq servo-thread
-addf lut5.0 servo-thread
+addf limit-switches-lut servo-thread
 # addf pwmgen.update servo-thread
 
 # net spindle-cmd-rpm => pwmgen.0.value
@@ -70,13 +70,13 @@ net xdir            => parport.0.pin-17-out
 net all-limit-home  <= parport.0.pin-10-in-not
 net estop-ext       <= parport.0.pin-11-in
 net zneg-limit	    <= parport.0.pin-13-in
-setp lut5.0.function 0x10000
-net all-limit-home => lut5.0.in-4
-net all-limit <= lut5.0.out
-net homing-x <= axis.0.homing => lut5.0.in-0
-net homing-y <= axis.1.homing => lut5.0.in-1
-net homing-z <= axis.2.homing => lut5.0.in-2
-net homing-a <= axis.3.homing => lut5.0.in-3
+setp limit-switches-lut.function 0x10000
+net all-limit-home => limit-switches-lut.in-4
+net all-limit <= limit-switches-lut.out
+net homing-x <= axis.0.homing => limit-switches-lut.in-0
+net homing-y <= axis.1.homing => limit-switches-lut.in-1
+net homing-z <= axis.2.homing => limit-switches-lut.in-2
+net homing-a <= axis.3.homing => limit-switches-lut.in-3
 
 setp stepgen.0.position-scale [AXIS_0]SCALE
 setp stepgen.0.steplen 1

@@ -32,8 +32,8 @@ zero-z      = halui.mdi-command-14
 zero-a      = halui.mdi-command-15
 
 safe-z      = halui.mdi-command-11
-# in this sim, home-all only works first time, hold down till finished:
-home        = halui.home-all
+# Home used as Enable key, hold to enable pendant.
+home        = motion-inhibit-lut.in-0
 macro-1     = halui.mdi-command-01
 macro-2     = halui.mdi-command-02
 macro-3     = halui.mdi-command-03

@@ -1,0 +1,18 @@
+# Preventing spindle start when probe in spindle
+loadrt comp names=probe-tool-number-comp
+loadrt conv_u32_float names=conv
+addf probe-tool-number-comp servo-thread
+addf conv servo-thread
+#net probe-tool-number => probe-tool-number-comp.in0
+net current-tool-number halui.tool.number => conv.in 
+net current-tool-number-float conv.out => probe-tool-number-comp.in1
+net probe-in-spindle probe-tool-number-comp.equal => motion.spindle-inhibit
+setp probe-tool-number-comp.in0 6
+
+# Only enable feed if pendant enabled or in auto mode 
+loadrt lut5 names=motion-inhibit-lut
+addf motion-inhibit-lut servo-thread
+# NOR Gate
+setp motion-inhibit-lut.function 0x1
+net is-auto-mode halui.mode.is-auto => motion-inhibit-lut.in-1
+net motion-inhibited motion-inhibit-lut.out => motion.feed-inhibit
