@@ -69,7 +69,7 @@ setp parport.0.pin-17-out-invert 1
 net xdir            => parport.0.pin-17-out
 net all-limit-home  <= parport.0.pin-10-in-not
 net estop-ext       <= parport.0.pin-11-in
-net zneg-limit	    <= parport.0.pin-13-in
+#net zneg-limit	    <= parport.0.pin-13-in
 setp limit-switches-lut.function 0x10000
 net all-limit-home => limit-switches-lut.in-4
 net all-limit <= limit-switches-lut.out
@@ -120,7 +120,7 @@ net zstep <= stepgen.2.step
 net zdir <= stepgen.2.dir
 net zenable axis.2.amp-enable-out => stepgen.2.enable
 net all-limit-home => axis.2.home-sw-in
-net zneg-limit => axis.2.neg-lim-sw-in
+#net zneg-limit => axis.2.neg-lim-sw-in
 net all-limit => axis.2.pos-lim-sw-in
 
 setp stepgen.3.position-scale [AXIS_3]SCALE
