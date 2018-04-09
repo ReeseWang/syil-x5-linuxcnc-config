@@ -8,10 +8,10 @@ net spindle-at-speed <= vfdm_vfd.at-speed
 loadrt encoder names=spindle-encoder
 addf encoder.update-counters base-thread
 addf encoder.capture-position servo-thread
-setp spindle-encoder.position-scale 108
+setp spindle-encoder.position-scale 36
 setp spindle-encoder.x4-mode 1
-net spindle-a parport.0.pin-15-in => spindle-encoder.phase-A
-net spindle-b parport.0.pin-13-in => spindle-encoder.phase-B
+net spindle-a parport.0.pin-15-in => spindle-encoder.phase-B
+net spindle-b parport.0.pin-13-in => spindle-encoder.phase-A
 net spindle-z parport.0.pin-12-in-not => spindle-encoder.phase-Z
 net spindle-index-enable spindle-encoder.index-enable motion.spindle-index-enable
 net spindle-revs spindle-encoder.position => motion.spindle-revs
