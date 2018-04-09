@@ -19,7 +19,7 @@ layout = 2
 coords = x y z a
 # lowpass settings:
 # coef: slows rate of change of output,  range: 0 < coef < 1
-coefs = 1 1 1 1
+coefs = 0.01 0.01 0.01 0.01
 # scale plus or minus, rotaries may require larger scale factor:
 scales = 1 1 1 1
 # jogmode normal(default) or vnormal or plus-minus
@@ -36,7 +36,7 @@ require_pendant = yes
 # inch_or_mm = in | mm
 inch_or_mm = mm
 # mpg_accels: provision for reduced acceleration for manual mode jogging
-mpg_accels = 300 300 300 300
+mpg_accels = 100 100 100 250
 
 [APPLICATIONS]
 APP = xhc-hb04-accels
